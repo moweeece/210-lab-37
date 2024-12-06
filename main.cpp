@@ -3,19 +3,21 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <map>
+#include <list>
 using namespace std;
 
 // function to sum ascii values of a string
-int sum_ascii(const string& fileString)
+int gen_hash_index(const string& fileString)
 {
-    int sum = 0;
+    int index = 0;
 
     for (char c : fileString) {
         // convert the character to an int value and add that value to the sum variable
-        sum += (int) c;
+        index += (int) c;
     }
 
-    return sum;
+    return index % 1000;
 
 }
 
@@ -32,15 +34,41 @@ int main() {
         return 1; // to exit if no file found
     }
 
+    // map to store hash index and list of strings
+    map <int, list<string>> hashTable;
+
     string dataString;
-    int grandTotal = 0;
+    int hashIndex = 0;
 
     while(getline(inputFile, dataString))
     {
-        grandTotal += sum_ascii(dataString);
+        hashIndex = gen_hash_index(dataString);
+
+        // insert the string in the map
+        hashTable[hashIndex].push_back(dataString);
     }
 
-    cout << "The grand total of all ASCII values is: " << grandTotal << endl;
+    // output first 100 map entries
+    int i = 0;
+    for (const auto& entry : hashTable)
+    {
+        cout << "These strings are in Hash Index " << entry.first << ": ";
+
+        for (const auto& str : entry.second)
+        {
+            cout << str << " ";
+        }
+        cout << endl << endl;
+
+        i++;
+
+        // limits to 100 output cycles
+        if (i >= 100)
+        {
+            break;
+        }
+
+    }
 
     // close the file
     inputFile.close();
