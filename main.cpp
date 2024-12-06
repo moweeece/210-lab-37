@@ -7,19 +7,13 @@
 #include <list>
 using namespace std;
 
-// function to sum ascii values of a string
-int gen_hash_index(const string& fileString)
-{
-    int index = 0;
-
-    for (char c : fileString) {
-        // convert the character to an int value and add that value to the sum variable
-        index += (int) c;
-    }
-
-    return index % 1000;
-
-}
+// function prototypes
+int gen_hash_index(const string& fileString);
+void print_entries(const map<int, list<string>>& hash_table);
+void search_key(const map<int, list<string>>& hash_table);
+void add_key(const map<int, list<string>>& hash_table);
+void remove_key(const map<int, list<string>>& hash_table);
+void modify_key(const map<int, list<string>>& hash_table);
 
 
 int main() {
@@ -48,10 +42,91 @@ int main() {
         hashTable[hashIndex].push_back(dataString);
     }
 
+     // close the file
+    inputFile.close();
+
+    // switch case menu
+    while (true)
+    {
+        int userChoice;
+
+        cout << "==========Menu==========\n";
+        cout << "[1] Print first 100 entries\n";
+        cout << "[2] Search for a key\n";
+        cout << "[3] Add a key\n";
+        cout << "[4] Remove a key\n";
+        cout << "[5] Modify a key\n";
+        cout << "[6] Exit\n";
+        cout << "Selection: ";
+        cin >> userChoice;
+
+        switch(userChoice)
+        {
+            case 1:
+                print_entries(hashTable);
+                break;
+            
+            case 2:
+                search_key(hashTable);
+                break;
+            
+            case 3:
+                add_key(hashTable);
+                break;
+
+            case 4:
+                remove_key(hashTable);
+                break;
+
+            case 5:
+                modify_key(hashTable);
+                break;
+
+            case 6:
+                cout << "Exiting the program.\n";
+                return 0;
+            
+            default:
+                cout << "Invalid choice.\n";
+
+        }
+
+    }
+
+    return 0;
+}
+
+
+/*
+These targets are present in the dataset and can be used for testing:
+536B9DFC93AF
+1DA9D64D02A0
+666D109AA22E
+E1D2665B21EA
+*/
+
+
+// function definitions
+
+// function to generate a hash index number
+int gen_hash_index(const string& fileString)
+{
+    int index = 0;
+
+    for (char c : fileString) {
+        // convert the character to an int value and add that value to the sum variable
+        index += (int) c;
+    }
+
+    return index % 1000;
+}
+
+// function to print the first 100 entries
+void print_entries(const map<int, list<string>>& hash_table)
+{
     // output first 100 map entries
-    // MOVE THIS TO PRINT FUNCTION
     int i = 0;
-    for (const auto& entry : hashTable)
+    for (const auto& entry : hash_table)
     {
         cout << "These strings are in Hash Index " << entry.first << ": ";
 
@@ -71,76 +146,28 @@ int main() {
 
     }
 
-     // close the file
-    inputFile.close();
-
-    // switch case menu
-    while (true)
-    {
-        int userChoice;
-
-        cout << "Menu\n";
-        cout << "====\n";
-        cout << "[1] Print first 100 entries\n";
-        cout << "[2] Search for a key\n";
-        cout << "[3] Add a key\n";
-        cout << "[4] Remove a key\n";
-        cout << "[5] Modify a key\n";
-        cout << "[6] Exit\n";
-        cout << "Selection: ";
-        cin >> userChoice;
-
-        switch(userChoice)
-        {
-            case 1:
-                // print
-                break;
-            
-            case 2:
-                // search
-                break;
-            
-            case 3:
-                // add
-                break;
-
-            case 4:
-                // remove
-                break;
-
-            case 5:
-                // modify
-                break;
-
-            case 6:
-                // exit
-            
-            default:
-                // error
-
-
-        }
-
-    }
-
-   
-/*
-    char a = 'A';
-    cout << a << endl;
-    cout << (int) a << endl;
-    int b = 66;
-    cout << b << endl;
-    cout << (char) b << endl;
-*/
-
-    return 0;
 }
 
+// function to search for a key
+void search_key(const map<int, list<string>>& hash_table)
+{
 
-/*
-These targets are present in the dataset and can be used for testing:
-536B9DFC93AF
-1DA9D64D02A0
-666D109AA22E
-E1D2665B21EA
-*/
+}
+
+// function to add a key
+void add_key(const map<int, list<string>>& hash_table)
+{
+
+}
+
+// function to remove a key
+void remove_key(const map<int, list<string>>& hash_table)
+{
+
+}
+
+// function to modify a key
+void modify_key(const map<int, list<string>>& hash_table)
+{
+
+}
