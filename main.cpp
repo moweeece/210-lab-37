@@ -1,17 +1,43 @@
 // COMSC-210 | Mauricio Espinosa | Lab 37 & 38
 
 #include <iostream>
+#include <string>
 using namespace std;
+
+// function to sum ascii values of a string
+int sum_ascii(const string& userString)
+{
+    int sum = 0;
+
+    for (char c : userString) {
+        // convert the character to an int value and add that value to the sum variable
+        sum += (int) c;
+    }
+
+    return sum;
+
+}
 
 
 int main() {
 
+    string testString;
+
+    cout << "Enter a string to test: ";
+    getline(cin, testString);
+
+    int asciiSum = sum_ascii(testString);
+
+    cout << "The sum of ascii values for the string " << testString << " is: " << asciiSum << endl;
+
+/*
     char a = 'A';
     cout << a << endl;
     cout << (int) a << endl;
     int b = 66;
     cout << b << endl;
     cout << (char) b << endl;
+*/
 
     return 0;
 }
