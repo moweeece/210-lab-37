@@ -11,9 +11,9 @@ using namespace std;
 int gen_hash_index(const string& fileString);
 void print_entries(const map<int, list<string>>& hash_table);
 void search_key(const map<int, list<string>>& hash_table);
-void add_key(const map<int, list<string>>& hash_table);
-void remove_key(const map<int, list<string>>& hash_table);
-void modify_key(const map<int, list<string>>& hash_table);
+void add_key(map<int, list<string>>& hash_table);
+void remove_key(map<int, list<string>>& hash_table);
+void modify_key(map<int, list<string>>& hash_table);
 
 
 int main() {
@@ -130,9 +130,9 @@ void print_entries(const map<int, list<string>>& hash_table)
     {
         cout << "These strings are in Hash Index " << entry.first << ": ";
 
-        for (const auto& str : entry.second)
+        for (const auto& strPrint : entry.second)
         {
-            cout << str << " ";
+            cout << strPrint << " ";
         }
         cout << endl << endl;
 
@@ -151,23 +151,52 @@ void print_entries(const map<int, list<string>>& hash_table)
 // function to search for a key
 void search_key(const map<int, list<string>>& hash_table)
 {
+    int searchKey;
+    cout << "Enter a hash index to search: ";
+    cin >> searchKey;
 
+    auto it = hash_table.find(searchKey);
+    // if the iterator is not at the end, then a value is found
+    if(it != hash_table.end())
+    {
+        cout << "Hash Index: " << it->first << " contains strings: ";
+        for (const auto& strSearch : it->second)
+        {
+            cout << strSearch << " ";
+        }
+        cout << endl << endl;
+    }
+    else
+    {
+        cout << "Key not found.\n";
+    }
 }
 
 // function to add a key
-void add_key(const map<int, list<string>>& hash_table)
+void add_key(map<int, list<string>>& hash_table)
 {
+    int newKey;
+    string newString;
 
+    cout << "Enter new hash index: ";
+    cin >> newKey;
+    cin.ignore();
+
+    cout << "Enter new string to add: ";
+    cin >> newString;
+
+    hash_table[newKey].push_back(newString);
+    cout << "String " << newString << " added!" << endl;
 }
 
 // function to remove a key
-void remove_key(const map<int, list<string>>& hash_table)
+void remove_key(map<int, list<string>>& hash_table)
 {
 
 }
 
 // function to modify a key
-void modify_key(const map<int, list<string>>& hash_table)
+void modify_key(map<int, list<string>>& hash_table)
 {
 
 }
