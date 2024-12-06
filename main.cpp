@@ -2,14 +2,15 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 // function to sum ascii values of a string
-int sum_ascii(const string& userString)
+int sum_ascii(const string& fileString)
 {
     int sum = 0;
 
-    for (char c : userString) {
+    for (char c : fileString) {
         // convert the character to an int value and add that value to the sum variable
         sum += (int) c;
     }
@@ -21,14 +22,28 @@ int sum_ascii(const string& userString)
 
 int main() {
 
-    string testString;
+    // open the file
+    ifstream inputFile("data.txt");
 
-    cout << "Enter a string to test: ";
-    getline(cin, testString);
+    // file open validation
+    if (!inputFile)
+    {
+        cerr << "Error opening the file!" << endl;
+        return 1; // to exit if no file found
+    }
 
-    int asciiSum = sum_ascii(testString);
+    string dataString;
+    int grandTotal = 0;
 
-    cout << "The sum of ascii values for the string " << testString << " is: " << asciiSum << endl;
+    while(getline(inputFile, dataString))
+    {
+        grandTotal += sum_ascii(dataString);
+    }
+
+    cout << "The grand total of all ASCII values is: " << grandTotal << endl;
+
+    // close the file
+    inputFile.close();
 
 /*
     char a = 'A';
