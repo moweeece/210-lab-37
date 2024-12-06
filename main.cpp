@@ -49,6 +49,7 @@ int main() {
     }
 
     // output first 100 map entries
+    // MOVE THIS TO PRINT FUNCTION
     int i = 0;
     for (const auto& entry : hashTable)
     {
@@ -70,9 +71,59 @@ int main() {
 
     }
 
-    // close the file
+     // close the file
     inputFile.close();
 
+    // switch case menu
+    while (true)
+    {
+        int userChoice;
+
+        cout << "Menu\n";
+        cout << "====\n";
+        cout << "[1] Print first 100 entries\n";
+        cout << "[2] Search for a key\n";
+        cout << "[3] Add a key\n";
+        cout << "[4] Remove a key\n";
+        cout << "[5] Modify a key\n";
+        cout << "[6] Exit\n";
+        cout << "Selection: ";
+        cin >> userChoice;
+
+        switch(userChoice)
+        {
+            case 1:
+                // print
+                break;
+            
+            case 2:
+                // search
+                break;
+            
+            case 3:
+                // add
+                break;
+
+            case 4:
+                // remove
+                break;
+
+            case 5:
+                // modify
+                break;
+
+            case 6:
+                // exit
+            
+            default:
+                // error
+
+
+        }
+
+    }
+
+   
 /*
     char a = 'A';
     cout << a << endl;
