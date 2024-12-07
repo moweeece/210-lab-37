@@ -155,6 +155,7 @@ void search_key(const map<int, list<string>>& hash_table)
     cout << "Enter a hash index to search: ";
     cin >> searchKey;
 
+    // set iterator pointer to position of the desired key
     auto it = hash_table.find(searchKey);
     // if the iterator is not at the end, then a value is found
     if(it != hash_table.end())
@@ -181,9 +182,11 @@ void add_key(map<int, list<string>>& hash_table)
     cout << "Enter new hash index: ";
     cin >> newKey;
     cin.ignore();
+    cout << endl;
 
     cout << "Enter new string to add: ";
     cin >> newString;
+    cout << endl;
 
     hash_table[newKey].push_back(newString);
     cout << "String " << newString << " added!" << endl;
@@ -192,11 +195,60 @@ void add_key(map<int, list<string>>& hash_table)
 // function to remove a key
 void remove_key(map<int, list<string>>& hash_table)
 {
+    int removeKey;
 
+    cout << "Enter hash index to remove: ";
+    cin >> removeKey;
+
+    // set iterator pointer to position of the desired key
+    auto it = hash_table.find(removeKey);
+    // if the iterator is not at the end, then a value is found
+    if (it != hash_table.end())
+    {
+        hash_table.erase(it);
+        cout << "Key " << removeKey << " removed!" << endl;
+    }
+    else
+    {
+        cout << "Key not found.\n";
+    }
 }
 
 // function to modify a key
 void modify_key(map<int, list<string>>& hash_table)
 {
+    int modifyKey;
+    string modifyString;
+
+    cout << "Enter a hash index to modify: ";
+    cin >> modifyKey;
+    cin.ignore();
+    cout << endl;
+
+    // set iterator pointer to position of the desired key
+    auto it = hash_table.find(modifyKey);
+    // if the iterator is not at the end, then a value is found
+    if(it != hash_table.end())
+    {
+        cout << "Current Strings: ";
+        // display current strings at that hash index
+        for (const auto& strModify : it->second)
+        {
+            cout << strModify << " ";
+        }
+        cout << endl;
+
+        cout << "Enter new string to replace the original: ";
+        cin >> modifyString;
+        cout << endl;
+
+        // replace the front string with the new string from user input
+        it->second.front() = modifyString;
+        cout << "String Updated!\n";     
+    }
+    else
+    {
+        cout << "Key not found.\n";
+    }
 
 }
